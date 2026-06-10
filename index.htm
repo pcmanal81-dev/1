@@ -20,19 +20,33 @@ body {
 
 #text {
   font-size: 34px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  z-index: 2;
+  position: relative;
 }
 
-.big { font-size: 65px; font-weight: bold; }
+.big { font-size: 70px; font-weight: bold; }
 
 .blue { color: #4da3ff; }
 .pink { color: #ff69b4; }
+
+/* صور الخلفية */
+.bgimg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  z-index: 0;
+}
 </style>
 </head>
 
 <body>
 
 <div id="text">...</div>
+
+<img id="bg" class="bgimg" src="https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1200&q=60">
 
 <audio id="music"
 src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b8f7f8f7.mp3?filename=suspense-110096.mp3">
@@ -44,6 +58,7 @@ src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b8f7f8f7.mp3?file
 
 let text = document.getElementById("text");
 let music = document.getElementById("music");
+let bg = document.getElementById("bg");
 
 function show(msg, time, color="", big=false){
   setTimeout(()=>{
@@ -52,36 +67,56 @@ function show(msg, time, color="", big=false){
   }, time);
 }
 
+function changeBG(url){
+  setTimeout(()=>{ bg.src = url; }, 0);
+}
+
 window.onload = () => {
 
 music.play().catch(()=>{});
 
-// 🖤 بداية أسرع
-show("أول حفيد في بيت الشرايعة", 200);
-show("مين هو؟", 1200);
-show("السؤال الكبير...", 2000);
-show("Boy or Girl?", 2600);
+// 🖤 البداية
+show("أول حفيد في بيت الشرايعة", 500);
+show("مين رح يكون؟", 2500);
+show("السؤال الكبير...", 4500);
+show("Boy or Girl?", 6500);
 
-// 📊 إحصائيات سريعة جدًا (تضليل قوي)
-show("بنت 55% / ولد 45%", 3200, "pink");
-show("بنت 68% / ولد 32%", 3600, "pink");
-show("بنت 73% / ولد 27%", 4000, "pink");
-show("بنت 81% / ولد 19%", 4400, "pink");
-show("بنت 88% / ولد 12%", 4800, "pink");
-show("بنت 92% / ولد 8%", 5200, "pink");
+// 💗 صور بنات (تأكيد وهمي)
+changeBG("https://images.unsplash.com/photo-1520975958225-6f61d4b2f5b5?auto=format&fit=crop&w=1200&q=60");
+show("كل المؤشرات تشير...", 8500, "pink");
 
-// 💗 تأكيد وهمي
-show("كل شيء يشير إلى بنت 💗", 5800, "pink");
-show("أكيد بنت...", 6500, "pink");
+changeBG("https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=60");
+show("بنات 💗", 10500, "pink");
 
-// ⚠️ توتر
-show("لحظة...", 7200);
-show("انتظروا...", 7800);
+changeBG("https://images.unsplash.com/photo-1603575448360-153f093fd0f3?auto=format&fit=crop&w=1200&q=60");
+show("أكيد بنت...", 12500, "pink");
 
-// ⏳ عد سريع
-show("3", 8400, "", true);
-show("2", 9000, "", true);
-show("1", 9600, "", true);
+// 💗 GIRL تثبيت طويل
+changeBG("https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1200&q=60");
+show("GIRL 💗", 14500, "pink", true);
+
+// ⏳ تثبيت الكلمة (مهم)
+setTimeout(()=> {
+  text.innerHTML = "GIRL 💗💗💗";
+  text.className = "pink big";
+}, 16000);
+
+setTimeout(()=> {
+  text.innerHTML = "GIRL 💗 (أكيد؟)";
+}, 17500);
+
+setTimeout(()=> {
+  text.innerHTML = "GIRL 💗💗💗💗💗";
+}, 19000);
+
+// ⚠️ لحظة صدمة
+show("لحظة...", 21000);
+show("انتظروا الحقيقة...", 22500);
+
+// ⏳ عد تنازلي
+show("3", 24000, "", true);
+show("2", 25500, "", true);
+show("1", 27000, "", true);
 
 // 💥 كشف
 setTimeout(()=>{
@@ -92,12 +127,12 @@ text.innerHTML = "💙 IT'S A BOY 💙";
 text.className = "blue big";
 
 // 🎉 انفجار قوي
-let end = Date.now() + 2500;
+let end = Date.now() + 3000;
 
 (function frame(){
   confetti({
-    particleCount: 8,
-    spread: 100,
+    particleCount: 10,
+    spread: 120,
     origin: { y: 0.6 }
   });
 
@@ -106,11 +141,12 @@ let end = Date.now() + 2500;
   }
 })();
 
-}, 10500);
+}, 28500);
 
 };
 
 </script>
 
 </body>
+</html></body>
 </html>

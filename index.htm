@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>كشف جنس المولود</title>
+<title>Gender Reveal</title>
 
 <style>
 body {
@@ -19,31 +19,25 @@ body {
 }
 
 #text {
-  font-size: 32px;
-  transition: all 0.5s ease;
+  font-size: 34px;
+  transition: all 0.2s ease;
 }
 
-.big {
-  font-size: 60px;
-  font-weight: bold;
-}
+.big { font-size: 65px; font-weight: bold; }
 
 .blue { color: #4da3ff; }
 .pink { color: #ff69b4; }
-
 </style>
 </head>
 
 <body>
 
-<div id="text">جاري التحضير...</div>
+<div id="text">...</div>
 
-<!-- 🎵 موسيقى -->
 <audio id="music"
 src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b8f7f8f7.mp3?filename=suspense-110096.mp3">
 </audio>
 
-<!-- 💥 كونفيتي -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
@@ -58,59 +52,61 @@ function show(msg, time, color="", big=false){
   }, time);
 }
 
-// ▶️ تشغيل تلقائي
 window.onload = () => {
 
-  music.play().catch(()=>{});
+music.play().catch(()=>{});
 
-  // 🖤 البداية
-  show("أول حفيد في بيت الشرايعة...", 500);
-  show("حان وقت المفاجأة...", 3000);
-  show("السؤال هو...", 5000);
-  show("Boy or Girl?", 6500);
+// 🖤 بداية أسرع
+show("أول حفيد في بيت الشرايعة", 200);
+show("مين هو؟", 1200);
+show("السؤال الكبير...", 2000);
+show("Boy or Girl?", 2600);
 
-  // 📊 تقلبات
-  show("الاحتمالات تتغير...", 8000);
-  show("بنت 62% / ولد 38%", 9500, "pink");
-  show("بنت 45% / ولد 55%", 11000, "blue");
-  show("بنت 71% / ولد 29%", 13000, "pink");
+// 📊 إحصائيات سريعة جدًا (تضليل قوي)
+show("بنت 55% / ولد 45%", 3200, "pink");
+show("بنت 68% / ولد 32%", 3600, "pink");
+show("بنت 73% / ولد 27%", 4000, "pink");
+show("بنت 81% / ولد 19%", 4400, "pink");
+show("بنت 88% / ولد 12%", 4800, "pink");
+show("بنت 92% / ولد 8%", 5200, "pink");
 
-  // 💗 خداع
-  show("كل المؤشرات تقول: بنت 💗", 15000, "pink");
+// 💗 تأكيد وهمي
+show("كل شيء يشير إلى بنت 💗", 5800, "pink");
+show("أكيد بنت...", 6500, "pink");
 
-  // ⚠️ توتر
-  show("انتظروا...", 17000);
-  show("ليس بعد...", 18500);
+// ⚠️ توتر
+show("لحظة...", 7200);
+show("انتظروا...", 7800);
 
-  // ⏳ عد تنازلي
-  show("3", 20000, "", true);
-  show("2", 21500, "", true);
-  show("1", 23000, "", true);
+// ⏳ عد سريع
+show("3", 8400, "", true);
+show("2", 9000, "", true);
+show("1", 9600, "", true);
 
-  // 💥 كشف نهائي
-  setTimeout(()=>{
+// 💥 كشف
+setTimeout(()=>{
 
-    document.body.style.background = "#001a33";
+document.body.style.background = "#001a33";
 
-    text.innerHTML = "💙 IT'S A BOY 💙";
-    text.className = "blue big";
+text.innerHTML = "💙 IT'S A BOY 💙";
+text.className = "blue big";
 
-    // 🎉 انفجار
-    let end = Date.now() + 3000;
+// 🎉 انفجار قوي
+let end = Date.now() + 2500;
 
-    (function frame(){
-      confetti({
-        particleCount: 6,
-        spread: 90,
-        origin: { y: 0.6 }
-      });
+(function frame(){
+  confetti({
+    particleCount: 8,
+    spread: 100,
+    origin: { y: 0.6 }
+  });
 
-      if(Date.now() < end){
-        requestAnimationFrame(frame);
-      }
-    })();
+  if(Date.now() < end){
+    requestAnimationFrame(frame);
+  }
+})();
 
-  }, 24500);
+}, 10500);
 
 };
 

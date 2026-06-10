@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <title>Gender Reveal</title>
@@ -21,7 +21,7 @@ body {
 
 #text {
   font-size: 34px;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
   z-index: 2;
   position: relative;
 }
@@ -29,10 +29,8 @@ body {
 .big { font-size: 72px; font-weight: bold; }
 
 .pink { color: #ff4fb8; }
-
 .blue { color: #4da3ff; }
 
-/* background image */
 .bg {
   position: absolute;
   width: 100%;
@@ -48,4 +46,125 @@ body {
 
 <div id="text">...</div>
 
-<img id="bg" class="bg" src="https://images.unsplash.com/photo-1520975958225-6f61d4b2f5b5?auto=format&fit
+<img id="bg" class="bg" src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=60">
+
+<!-- 🎵 SOUNDS -->
+<audio id="heart" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b8f7f8f7.mp3?filename=suspense-110096.mp3">
+</audio>
+
+<audio id="baby">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/01/audio_baby_laugh.mp3">
+</audio>
+
+<audio id="cheer">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_crowd_cheer.mp3">
+</audio>
+
+<!-- 💥 CONFETTI -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+let text = document.getElementById("text");
+let bg = document.getElementById("bg");
+
+let heart = document.getElementById("heart");
+let baby = document.getElementById("baby");
+let cheer = document.getElementById("cheer");
+
+function show(msg, time, color="", big=false){
+  setTimeout(()=>{
+    text.innerHTML = msg;
+    text.className = color + (big ? " big" : "");
+  }, time);
+}
+
+function setBG(color, img=null){
+  setTimeout(()=>{
+    document.body.style.background = color;
+    if(img) bg.src = img;
+  }, 0);
+}
+
+window.onload = () => {
+
+// 🎵 start heartbeat
+heart.play().catch(()=>{});
+
+// 🖤 INTRO
+show("أول حفيد في بيت الشرايعة", 500);
+show("The suspense begins...", 2500);
+show("Boy or Girl?", 5000);
+
+// ⚫ suspense
+setBG("black");
+
+show("Analyzing clues...", 8000);
+show("Heartbeat rising...", 10000);
+show("Everything points somewhere...", 12000);
+
+// 👶 baby sound (fake girl hint)
+setTimeout(()=> baby.play(), 13000);
+
+// 💗 GIRL BIAS
+show("Soft signals detected...", 14000);
+show("Pink energy everywhere...", 16000);
+show("Almost certain...", 18000);
+
+// 🎀 GIRL REVEAL
+setTimeout(()=> {
+  setBG("#ff4fb8");
+  bg.src = "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=60";
+}, 20000);
+
+show("GIRL 💗", 20000, "pink", true);
+
+// 💗 long GIRL fake confirmation
+show("bows 🎀", 22000, "pink");
+show("flowers 🌸", 24000, "pink");
+show("teddy bears 🧸", 26000, "pink");
+show("EVERYTHING says GIRL 💗", 28000, "pink", true);
+
+// ⚠️ tension
+show("Wait...", 30000);
+show("Something feels off...", 32000);
+
+// ⏳ countdown
+show("3", 34000, "", true);
+show("2", 35500, "", true);
+show("1", 37000, "", true);
+
+// 💥 FINAL BOY REVEAL
+setTimeout(()=>{
+
+heart.pause();
+cheer.play();
+
+setBG("#001a33");
+
+text.innerHTML = "💙 IT'S A BOY 💙";
+text.className = "blue big";
+
+// 🎉 explosion
+let end = Date.now() + 3500;
+
+(function frame(){
+  confetti({
+    particleCount: 12,
+    spread: 140,
+    origin: { y: 0.6 }
+  });
+
+  if(Date.now() < end){
+    requestAnimationFrame(frame);
+  }
+})();
+
+}, 38500);
+
+};
+</script>
+
+</body>
+</html>

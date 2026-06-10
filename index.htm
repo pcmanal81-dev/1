@@ -18,24 +18,6 @@ body {
   overflow: hidden;
 }
 
-#startScreen, #revealScreen {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-button {
-  padding: 15px 30px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
 #text {
   font-size: 32px;
   transition: all 0.5s ease;
@@ -49,30 +31,19 @@ button {
 .blue { color: #4da3ff; }
 .pink { color: #ff69b4; }
 
-.hidden { display: none; }
-
 </style>
 </head>
 
 <body>
 
-<!-- 🎬 START SCREEN -->
-<div id="startScreen">
-  <h1>أول حفيد في بيت الشرايعة</h1>
-  <button onclick="startReveal()">ابدأ الكشف 💙</button>
-</div>
+<div id="text">جاري التحضير...</div>
 
-<!-- 🎬 REVEAL SCREEN -->
-<div id="revealScreen" class="hidden">
-  <div id="text">...</div>
-</div>
-
-<!-- 🎵 MUSIC -->
+<!-- 🎵 موسيقى -->
 <audio id="music"
 src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b8f7f8f7.mp3?filename=suspense-110096.mp3">
 </audio>
 
-<!-- 💥 CONFETTI -->
+<!-- 💥 كونفيتي -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
@@ -87,37 +58,36 @@ function show(msg, time, color="", big=false){
   }, time);
 }
 
-function startReveal(){
+// ▶️ تشغيل تلقائي
+window.onload = () => {
 
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("revealScreen").classList.remove("hidden");
+  music.play().catch(()=>{});
 
-  music.play();
-
-  // 🖤 Intro
-  show("حان وقت المفاجأة...", 500);
-  show("لكن السؤال هو...", 3000);
-  show("Boy or Girl?", 5000);
+  // 🖤 البداية
+  show("أول حفيد في بيت الشرايعة...", 500);
+  show("حان وقت المفاجأة...", 3000);
+  show("السؤال هو...", 5000);
+  show("Boy or Girl?", 6500);
 
   // 📊 تقلبات
-  show("الاحتمالات تتغير...", 7000);
-  show("بنت 62% / ولد 38%", 8500, "pink");
-  show("بنت 45% / ولد 55%", 10000, "blue");
-  show("بنت 71% / ولد 29%", 12000, "pink");
+  show("الاحتمالات تتغير...", 8000);
+  show("بنت 62% / ولد 38%", 9500, "pink");
+  show("بنت 45% / ولد 55%", 11000, "blue");
+  show("بنت 71% / ولد 29%", 13000, "pink");
 
   // 💗 خداع
-  show("كل المؤشرات تقول: بنت 💗", 14500, "pink");
+  show("كل المؤشرات تقول: بنت 💗", 15000, "pink");
 
   // ⚠️ توتر
-  show("انتظروا...", 16500);
-  show("ليس بعد...", 18000);
+  show("انتظروا...", 17000);
+  show("ليس بعد...", 18500);
 
   // ⏳ عد تنازلي
-  show("3", 19500, "", true);
-  show("2", 21000, "", true);
-  show("1", 22500, "", true);
+  show("3", 20000, "", true);
+  show("2", 21500, "", true);
+  show("1", 23000, "", true);
 
-  // 💥 كشف
+  // 💥 كشف نهائي
   setTimeout(()=>{
 
     document.body.style.background = "#001a33";
@@ -132,4 +102,19 @@ function startReveal(){
       confetti({
         particleCount: 6,
         spread: 90,
-        origin: {
+        origin: { y: 0.6 }
+      });
+
+      if(Date.now() < end){
+        requestAnimationFrame(frame);
+      }
+    })();
+
+  }, 24500);
+
+};
+
+</script>
+
+</body>
+</html>

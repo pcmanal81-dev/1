@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Gender Reveal</title>
@@ -16,6 +16,7 @@ body {
   align-items: center;
   text-align: center;
   overflow: hidden;
+  transition: 0.6s ease;
 }
 
 #text {
@@ -25,18 +26,19 @@ body {
   position: relative;
 }
 
-.big { font-size: 70px; font-weight: bold; }
+.big { font-size: 72px; font-weight: bold; }
+
+.pink { color: #ff4fb8; }
 
 .blue { color: #4da3ff; }
-.pink { color: #ff69b4; }
 
-/* صور الخلفية */
-.bgimg {
+/* background image */
+.bg {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.25;
+  opacity: 0.18;
   z-index: 0;
 }
 </style>
@@ -46,107 +48,4 @@ body {
 
 <div id="text">...</div>
 
-<img id="bg" class="bgimg" src="https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1200&q=60">
-
-<audio id="music"
-src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b8f7f8f7.mp3?filename=suspense-110096.mp3">
-</audio>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<script>
-
-let text = document.getElementById("text");
-let music = document.getElementById("music");
-let bg = document.getElementById("bg");
-
-function show(msg, time, color="", big=false){
-  setTimeout(()=>{
-    text.innerHTML = msg;
-    text.className = color + (big ? " big" : "");
-  }, time);
-}
-
-function changeBG(url){
-  setTimeout(()=>{ bg.src = url; }, 0);
-}
-
-window.onload = () => {
-
-music.play().catch(()=>{});
-
-// 🖤 البداية
-show("أول حفيد في بيت الشرايعة", 500);
-show("مين رح يكون؟", 2500);
-show("السؤال الكبير...", 4500);
-show("Boy or Girl?", 6500);
-
-// 💗 صور بنات (تأكيد وهمي)
-changeBG("https://images.unsplash.com/photo-1520975958225-6f61d4b2f5b5?auto=format&fit=crop&w=1200&q=60");
-show("كل المؤشرات تشير...", 8500, "pink");
-
-changeBG("https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=60");
-show("بنات 💗", 10500, "pink");
-
-changeBG("https://images.unsplash.com/photo-1603575448360-153f093fd0f3?auto=format&fit=crop&w=1200&q=60");
-show("أكيد بنت...", 12500, "pink");
-
-// 💗 GIRL تثبيت طويل
-changeBG("https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1200&q=60");
-show("GIRL 💗", 14500, "pink", true);
-
-// ⏳ تثبيت الكلمة (مهم)
-setTimeout(()=> {
-  text.innerHTML = "GIRL 💗💗💗";
-  text.className = "pink big";
-}, 16000);
-
-setTimeout(()=> {
-  text.innerHTML = "GIRL 💗 (أكيد؟)";
-}, 17500);
-
-setTimeout(()=> {
-  text.innerHTML = "GIRL 💗💗💗💗💗";
-}, 19000);
-
-// ⚠️ لحظة صدمة
-show("لحظة...", 21000);
-show("انتظروا الحقيقة...", 22500);
-
-// ⏳ عد تنازلي
-show("3", 24000, "", true);
-show("2", 25500, "", true);
-show("1", 27000, "", true);
-
-// 💥 كشف
-setTimeout(()=>{
-
-document.body.style.background = "#001a33";
-
-text.innerHTML = "💙 IT'S A BOY 💙";
-text.className = "blue big";
-
-// 🎉 انفجار قوي
-let end = Date.now() + 3000;
-
-(function frame(){
-  confetti({
-    particleCount: 10,
-    spread: 120,
-    origin: { y: 0.6 }
-  });
-
-  if(Date.now() < end){
-    requestAnimationFrame(frame);
-  }
-})();
-
-}, 28500);
-
-};
-
-</script>
-
-</body>
-</html></body>
-</html>
+<img id="bg" class="bg" src="https://images.unsplash.com/photo-1520975958225-6f61d4b2f5b5?auto=format&fit
